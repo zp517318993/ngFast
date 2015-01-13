@@ -1,14 +1,16 @@
+process.env.NODE_ENV ?= 'dev'
+
 module.exports =
 
   serverPort: 3054
 
   styles:
     src: 'app/styles/**/*.scss'
-    dest: 'build/css'
+    dest: 'build/' + process.env.NODE_ENV + '/css'
 
   scripts:
     src: 'app/coffee/**/*.coffee'
-    dest: 'build/js'
+    dest: 'build/' + process.env.NODE_ENV + '/js'
 
   coffee:
     src: ['app/coffee/**/*.coffee', 'test/**/*.coffee']
@@ -24,10 +26,10 @@ module.exports =
 
   images:
     src: 'app/images/**/*'
-    dest: 'build/images'
+    dest: 'build/' + process.env.NODE_ENV + '/images'
 
   dist:
-    root: 'build'
+    root: 'build/' + process.env.NODE_ENV
 
   browserify:
     entries: ['./app/coffee/app.coffee']

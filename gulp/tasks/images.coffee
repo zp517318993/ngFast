@@ -8,5 +8,5 @@ gulp.task 'images', ->
   dest = config.images.dest
   gulp.src config.images.src
   .pipe changed dest
-  .pipe gulpif global.isPord, imagemin()
+  .pipe gulpif !global.isDebug, imagemin()
   .pipe gulp.dest dest
