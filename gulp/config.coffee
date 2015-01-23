@@ -5,7 +5,7 @@ module.exports =
   serverPort: 3054
 
   styles:
-    src: 'app/styles/**/*.scss'
+    src: ['app/styles/**/*.scss']
     dest: 'build/' + process.env.NODE_ENV + '/css'
 
   scripts:

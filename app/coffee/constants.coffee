@@ -1,6 +1,8 @@
+config = require './config'
+
 AppSettings =
   appTitle: 'ngFast'
-  apiUrl: '/api/v1'
+  apiUrl: config.baseApi
 
 module.exports = AppSettings
 

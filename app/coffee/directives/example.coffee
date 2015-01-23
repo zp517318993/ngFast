@@ -1,4 +1,4 @@
-directivesModule = require './_index'
+directivesModule = require './index'
 
 exampleDirective = ->
   directive =
@@ -7,6 +7,7 @@ exampleDirective = ->
       $element.on 'click', ->
         console.log 'element clicked'
 
+  return directive
 
 
 directivesModule.directive 'exampleDirective', exampleDirective

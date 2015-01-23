@@ -3,9 +3,9 @@ angular = require 'angular'
 # angular modules
 require 'angular-ui-router'
 require './templates/templates.js'
-require './controllers/example'
-require './services/example'
-require './directives/example'
+require './controllers'
+require './services'
+require './directives'
 
 angular.element(document).ready ->
   requires = [

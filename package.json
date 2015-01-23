@@ -1,20 +1,14 @@
 {
-  "name": "angularjs-gulp-browserify-boilerplate",
+  "name": "ngFast",
   "version": "0.1.0",
-  "author": "Jake Marsh <jakemmarsh@gmail.com>",
-  "contributors": [
-    {
-      "name": "Solomon Hawk",
-      "email": "solomon.hawk@viget.com",
-      "url": "http://www.solomohawk.com/"
-    }
-  ],
-  "description": "Boilerplate using AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
+  "author": "soliury <hi@lingyong.me>",
+  "description": "Boilerplate using CoffeeScript, AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate.git"
+    "url": "https://github.com/soliury/ngFast.git"
   },
   "keywords": [
+    "coffee",
     "express",
     "gulp",
     "browserify",
@@ -107,6 +101,6 @@
     "test": "karma start test/karma.conf.js",
     "preprotractor": "npm run update-webdriver",
     "protractor": "npm run protractor test/protractor.conf.js",
-    "build": "gulp build && NODE_ENV=production gulp build"
+    "build": "NODE_ENV=dev-online gulp build && NODE_ENV=production gulp build"
   }
 }
