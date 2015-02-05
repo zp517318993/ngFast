@@ -14,6 +14,7 @@ collapse = require 'bundle-collapser/plugin'
 sourcemap = require 'gulp-sourcemaps'
 buffer = require 'vinyl-buffer'
 envify = require 'envify/custom'
+versionTag = require 'gulp-version-tag'
 
 
 buildScript = (file)->
@@ -29,7 +30,6 @@ buildScript = (file)->
     .bundle()
 
     gutil.log 'Rebundle...'
-
     stream.on 'error', handleErrors
     .pipe source file
     .pipe gulpif global.isDebug, buffer()
@@ -37,6 +37,9 @@ buildScript = (file)->
       loadMaps: true
     .pipe gulpif global.isDebug, sourcemap.write('./')
     .pipe gulpif !global.isDebug, streamify uglify()
+    .pipe gulpif !global.isDebug, versionTag __dirname, '../../package.json',
+      reuse: true
+      autoTagVersion: global.autoTagVersion
     .pipe gulp.dest config.scripts.dest
     .pipe browserSync.reload {stream: true, once: true}
 
@@ -54,8 +57,5 @@ buildScript = (file)->
   rebundler()
 
 gulp.task 'browserify', ->
+  buildScript 'app.js'
 
-  if global.isDebug
-    buildScript 'app.js'
-  else
-    buildScript "app-#{global.buildTime}.js"
