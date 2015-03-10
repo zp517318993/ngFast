@@ -10,6 +10,7 @@ sourcemaps = require 'gulp-sourcemaps'
 cssmin = require 'gulp-minify-css'
 rename = require 'gulp-rename'
 versionTag = require 'gulp-version-tag'
+filter = require 'gulp-filter'
 
 
 gulp.task 'styles', ->
@@ -27,4 +28,5 @@ gulp.task 'styles', ->
     reuse: true
     autoTagVersion: global.autoTagVersion
   .pipe gulp.dest config.styles.dest
+  .pipe filter '**/*.css'
   .pipe gulpif browserSync.active, browserSync.reload {stream: true}

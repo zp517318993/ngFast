@@ -9,12 +9,13 @@ browserify = require 'browserify'
 uglify = require 'gulp-uglify'
 handleErrors = require '../util/handleErrors'
 browserSync = require 'browser-sync'
-coffeeify = require 'coffeeify'
+coffeeify = require 'caching-coffeeify'
 collapse = require 'bundle-collapser/plugin'
 sourcemap = require 'gulp-sourcemaps'
 buffer = require 'vinyl-buffer'
 envify = require 'envify/custom'
 versionTag = require 'gulp-version-tag'
+filter = require 'gulp-filter'
 
 
 buildScript = (file)->
@@ -22,10 +23,14 @@ buildScript = (file)->
     entries: config.browserify.entries
     extensions: ['.coffee', '.js']
     debug: global.isDebug
+    cache: {}
+    packageCache: {}
+    fullPaths: true
   , watchify.args
 
 
   rebundler = ()->
+    start = new Date().getTime()
     stream = bundler
     .bundle()
 
@@ -41,7 +46,12 @@ buildScript = (file)->
       reuse: true
       autoTagVersion: global.autoTagVersion
     .pipe gulp.dest config.scripts.dest
-    .pipe browserSync.reload {stream: true, once: true}
+    .pipe filter '**/*.js'
+    .pipe browserSync.reload {stream: true}
+    end = new Date().getTime()
+    time = end - start
+    gutil.log gutil.colors.blue('[BS]'), gutil.colors.red("'rebundle'"), gutil.colors.green(time + ' ms')
+
 
   bundler
   .transform coffeeify
