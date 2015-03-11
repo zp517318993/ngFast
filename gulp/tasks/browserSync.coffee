@@ -8,3 +8,4 @@ gulp.task 'browserSync', ->
     open: "external"
     logConnections: true
     ghostMode: false
+    minify: false

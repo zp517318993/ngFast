@@ -16,6 +16,7 @@ buffer = require 'vinyl-buffer'
 envify = require 'envify/custom'
 versionTag = require 'gulp-version-tag'
 filter = require 'gulp-filter'
+debowerify = require 'debowerify'
 
 
 buildScript = (file)->
@@ -55,6 +56,7 @@ buildScript = (file)->
 
   bundler
   .transform coffeeify
+  .transform debowerify
   .transform envify
     NODE_ENV: global.env
     ip: global.ip
