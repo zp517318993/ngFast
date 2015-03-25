@@ -16,7 +16,8 @@ buffer = require 'vinyl-buffer'
 envify = require 'envify/custom'
 versionTag = require 'gulp-version-tag'
 filter = require 'gulp-filter'
-debowerify = require 'debowerify'
+clearDeadCode = require 'unreachable-branch-transform'
+intreq = require 'intreq-stream'
 
 
 buildScript = (file)->
@@ -37,6 +38,7 @@ buildScript = (file)->
 
     gutil.log 'Rebundle...'
     stream.on 'error', handleErrors
+    .pipe intreq()
     .pipe source file
     .pipe gulpif global.isDebug, buffer()
     .pipe gulpif global.isDebug, sourcemap.init
@@ -56,10 +58,10 @@ buildScript = (file)->
 
   bundler
   .transform coffeeify
-  .transform debowerify
   .transform envify
     NODE_ENV: global.env
     ip: global.ip
+  .transform clearDeadCode
   .transform 'brfs'
 
 
