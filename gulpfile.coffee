@@ -1,6 +1,7 @@
 os = require 'os'
 
 requireDir = require 'require-dir'
+getIp = require 'dev-ip'
 
 global.isProd = false
 global.env = 'dev'
@@ -8,7 +9,7 @@ global.env = 'dev'
 if process.env.NODE_ENV == 'production'
   global.autoTagVersion = false
 
-#global.ip = os.networkInterfaces().en0[1].address
+global.ip = getIp()[0]
 
 requireDir './gulp/tasks',
   recurse: true
