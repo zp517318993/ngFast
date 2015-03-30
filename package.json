@@ -67,6 +67,7 @@
     "gulp-util": "^3.0.1",
     "gulp-version-tag": "0.0.6",
     "imagemin-pngcrush": "^4.0.0",
+    "intreq-stream": "^1.0.0",
     "jasmine-core": "^2.2.0",
     "jshint-stylish": "^1.0.0",
     "karma": "^0.12.31",
