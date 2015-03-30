@@ -27,6 +27,7 @@ gulp.task 'styles', ->
   .pipe gulpif !global.isDebug, versionTag __dirname, '../../package.json',
     reuse: true
     autoTagVersion: global.autoTagVersion
+    beforeText: '_v'
   .pipe gulp.dest config.styles.dest
   .pipe filter '**/*.css'
   .pipe gulpif browserSync.active, browserSync.reload {stream: true}

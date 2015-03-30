@@ -3,12 +3,15 @@ express = require 'express'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 morgan = require 'morgan'
+compression = require 'compression'
 
 config = require '../config'
 
 
 gulp.task 'server', ->
   server = express()
+
+  server.use compression()
 
   server.use morgan 'dev'
   server.use express.static config.dist.root

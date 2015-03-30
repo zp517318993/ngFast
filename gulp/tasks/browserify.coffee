@@ -48,6 +48,7 @@ buildScript = (file)->
     .pipe gulpif !global.isDebug, versionTag __dirname, '../../package.json',
       reuse: true
       autoTagVersion: global.autoTagVersion
+      beforeText: '_v'
     .pipe gulp.dest config.scripts.dest
     .pipe filter '**/*.js'
     .pipe browserSync.reload {stream: true}

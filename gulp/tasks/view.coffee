@@ -17,8 +17,8 @@ gulp.task 'views', ->
 
   gulp.src 'app/index.html'
   .pipe gulpif !global.isDebug, htmlreplace
-    'css': "/css/main-#{global.versionTag}.css"
-    'js': "/js/app-#{global.versionTag}.js"
+    'css': "/css/main_v#{global.versionTag}.css"
+    'js': "/js/app_v#{global.versionTag}.js"
   .pipe gulpif !global.isDebug, htmlmin
     removeComments: true
     collapseWhitespace: true
