@@ -18,11 +18,13 @@ module.exports =
 
   views:
     watch: [
-      'app/index.html'
       'app/views/**/*.html'
     ]
     src: 'app/views/**/*.html'
     dest: 'app/coffee/templates'
+
+  index:
+    src: 'app/index.html'
 
   images:
     src: 'app/images/**/*'
@@ -34,6 +36,10 @@ module.exports =
   browserify:
     entries: ['./app/coffee/app.coffee']
     bundleName: 'app.js'
+
+  libs:
+    entries: ['./app/coffee/libs.coffee']
+    bundleName: 'vendor.js'
 
   test:
     karma: 'test/karma.conf.coffee'

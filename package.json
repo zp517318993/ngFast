@@ -1,6 +1,6 @@
 {
     "name": "ngFast",
-    "version": "0.2.3",
+    "version": "0.2.6",
     "author": "soliury <hi@lingyong.me>",
     "description": "Boilerplate using CoffeeScript, AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
     "repository": {
@@ -29,7 +29,7 @@
         "angular-ui-router": "^0.2.10",
         "brfs": "^1.2.0",
         "browser-sync": "^2.2.3",
-        "browserify": "^9.0.3",
+        "browserify": "9.0.3",
         "browserify-shim": "^3.8.3",
         "caching-coffeeify": "^0.5.0",
         "coffee-script": "^1.9.1",
@@ -44,6 +44,7 @@
         "gulp-cached": "^1.0.1",
         "gulp-changed": "^1.0.0",
         "gulp-coffee": "^2.2.0",
+        "gulp-duration": "0.0.0",
         "gulp-filter": "^2.0.2",
         "gulp-html-replace": "^1.4.2",
         "gulp-htmlmin": "^1.0.0",
@@ -54,17 +55,14 @@
         "gulp-minify-css": "^1.0.0",
         "gulp-notify": "^2.0.0",
         "gulp-plumber": "^1.0.0",
-        "gulp-protractor": "0.0.11",
         "gulp-rename": "^1.2.0",
         "gulp-sass": "^1.3.3",
         "gulp-sourcemaps": "^1.3.0",
         "gulp-streamify": "0.0.5",
         "gulp-uglify": "^1.0.1",
         "gulp-util": "^3.0.1",
-        "gulp-version-tag": "0.0.6",
-        "imagemin-pngcrush": "^4.0.0",
+        "gulp-version-tag": "0.0.10",
         "intreq-stream": "^1.0.0",
-        "jasmine-core": "^2.2.0",
         "jshint-stylish": "^1.0.0",
         "karma": "^0.12.31",
         "karma-bro": "^0.11.1",
@@ -72,18 +70,16 @@
         "karma-coverage": "^0.2.7",
         "karma-firefox-launcher": "^0.1.3",
         "karma-growl-reporter": "^0.1.1",
-        "karma-jasmine": "^0.3.5",
         "karma-mocha": "^0.1.10",
         "mocha": "^2.1.0",
         "morgan": "^1.2.2",
-        "pretty-hrtime": "^1.0.0",
-        "protractor": "^1.2.0",
         "require-dir": "^0.1.0",
         "run-sequence": "^1.0.2",
         "unreachable-branch-transform": "^0.2.3",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.1.0",
-        "watchify": "^2.0.0"
+        "vinyl-transform": "^1.0.0",
+        "watchify": "^2.4.0"
     },
     "browserify": {
         "transform": [
@@ -91,18 +87,16 @@
         ]
     },
     "browser": {
-        "angular": "./node_modules/angular/angular.js"
+        "angular": "./node_modules/angular/angular.js",
+        "templates.js": "./app/coffee/templates/templates.js"
     },
     "browserify-shim": {
         "angular": "angular"
     },
     "scripts": {
         "pretest": "npm install",
-        "test": "karma start test/karma.conf.js",
-        "preprotractor": "npm run update-webdriver",
-        "protractor": "npm run protractor test/protractor.conf.js",
         "build": "NODE_ENV=dev-online gulp build && NODE_ENV=production gulp build",
         "server:dev": "NODE_ENV=dev-online gulp server",
-        "server:production": "NODE_ENV=production gulp server"
+        "server:prod": "NODE_ENV=production gulp server"
     }
 }

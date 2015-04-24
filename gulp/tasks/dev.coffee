@@ -7,5 +7,5 @@ gulp.task 'dev', ['clean'], (cb)->
 
   global.isDebug = true
 
-  runSequence 'styles', 'images', 'views', 'browserify', 'watch', 'browserSync', cb
+  runSequence 'styles', 'images', 'index', 'views', 'vendor.js', 'app.js', 'watch', 'browserSync', cb
 

@@ -25,9 +25,11 @@ gulp.task 'server', ->
 
   s.on 'error', (err)->
     if err.code == 'EADDRINUSE'
-      gutil.log 'Development server is already started at port ' + config.serverport
+      gutil.log 'Development server is already started at port ' + config.serverPort
     else
       throw err
 
 
   s.listen config.serverPort
+
+  gutil.log "Server is running on #{config.serverPort}, You can visit http://localhost:#{config.serverPort}"

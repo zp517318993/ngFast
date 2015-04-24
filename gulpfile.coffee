@@ -3,7 +3,8 @@ os = require 'os'
 requireDir = require 'require-dir'
 getIp = require 'dev-ip'
 
-global.isProd = false
+
+global.isDebug = true
 global.env = 'dev'
 
 if process.env.NODE_ENV == 'production'
