@@ -1,8 +1,11 @@
-config = require '../config'
 changed = require 'gulp-changed'
 gulp = require 'gulp'
 gulpif = require 'gulp-if'
 imagemin = require 'gulp-imagemin'
+
+
+config = require '../config'
+
 
 gulp.task 'images', ->
   dest = config.images.dest

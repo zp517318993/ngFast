@@ -1,4 +1,3 @@
-config = require '../config'
 gulp = require 'gulp'
 gulpif = require 'gulp-if'
 gutil = require 'gulp-util'
@@ -7,10 +6,8 @@ streamify = require 'gulp-streamify'
 watchify = require 'watchify'
 browserify = require 'browserify'
 uglify = require 'gulp-uglify'
-handleErrors = require '../util/handleErrors'
 browserSync = require 'browser-sync'
 coffeeify = require 'caching-coffeeify'
-collapse = require 'bundle-collapser/plugin'
 sourcemap = require 'gulp-sourcemaps'
 buffer = require 'vinyl-buffer'
 envify = require 'envify/custom'
@@ -18,59 +15,68 @@ versionTag = require 'gulp-version-tag'
 filter = require 'gulp-filter'
 clearDeadCode = require 'unreachable-branch-transform'
 intreq = require 'intreq-stream'
+duration = require 'gulp-duration'
+
+
+config = require '../config'
+libs = require '../../app/coffee/libs'
+handleErrors = require '../util/handleErrors'
 
 
 buildScript = (file)->
-  bundler = browserify
+  {isDebug, env, ip} = global
+
+  b = browserify
     entries: config.browserify.entries
     extensions: ['.coffee', '.js']
-    debug: global.isDebug
+    debug: isDebug
     cache: {}
     packageCache: {}
     fullPaths: true
   , watchify.args
 
+  libs.forEach (lib)->
+    b.external lib
+
+  b.external 'templates.js'
 
   rebundler = ()->
-    start = new Date().getTime()
-    stream = bundler
-    .bundle()
+    browserifyTimer = duration 'Browserify app bundler time'
 
-    gutil.log 'Rebundle...'
-    stream.on 'error', handleErrors
+    b.bundle()
+    .once 'data', ()->
+      gutil.log 'Rebundle...'
+    .on 'error', handleErrors
     .pipe intreq()
     .pipe source file
-    .pipe gulpif global.isDebug, buffer()
-    .pipe gulpif global.isDebug, sourcemap.init
+    .pipe gulpif isDebug, buffer()
+    .pipe gulpif isDebug, sourcemap.init
       loadMaps: true
-    .pipe gulpif global.isDebug, sourcemap.write('./')
-    .pipe gulpif !global.isDebug, streamify uglify()
-    .pipe gulpif !global.isDebug, versionTag __dirname, '../../package.json',
+    .pipe gulpif isDebug, sourcemap.write('./')
+    .pipe gulpif !isDebug, streamify uglify()
+    .pipe gulpif !isDebug, versionTag __dirname, '../../package.json',
       reuse: true
       autoTagVersion: global.autoTagVersion
-      beforeText: '_v'
+    .pipe browserifyTimer
     .pipe gulp.dest config.scripts.dest
     .pipe filter '**/*.js'
-    .pipe browserSync.reload {stream: true}
-    end = new Date().getTime()
-    time = end - start
-    gutil.log gutil.colors.blue('[BS]'), gutil.colors.red("'rebundle'"), gutil.colors.green(time + ' ms')
+    .pipe browserSync.reload
+      stream: true
 
 
-  bundler
-  .transform coffeeify
+  b.transform coffeeify
   .transform envify
-    NODE_ENV: global.env
-    ip: global.ip
+    NODE_ENV: env
+    ip: ip
   .transform clearDeadCode
   .transform 'brfs'
 
 
-  if global.isDebug
-    bundler = watchify bundler
-    bundler.on 'update', rebundler
+  if isDebug
+    b = watchify b
+    b.on 'update', rebundler
   rebundler()
 
-gulp.task 'browserify', ->
+gulp.task 'app.js', ->
   buildScript 'app.js'
 

@@ -1,4 +1,3 @@
-config = require '../config'
 gulp = require 'gulp'
 sass = require 'gulp-sass'
 gulpif = require 'gulp-if'
@@ -11,6 +10,9 @@ cssmin = require 'gulp-minify-css'
 rename = require 'gulp-rename'
 versionTag = require 'gulp-version-tag'
 filter = require 'gulp-filter'
+
+
+config = require '../config'
 
 
 gulp.task 'styles', ->

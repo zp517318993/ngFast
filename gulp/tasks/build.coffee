@@ -10,4 +10,4 @@ gulp.task 'build', ['clean'], (cb)->
     global.env = 'production'
   else if process.env.NODE_ENV == 'dev-online'
     global.env = 'dev-online'
-  runSequence 'styles', 'images', 'views', 'browserify', cb
+  runSequence 'styles', 'images', 'index', 'views', 'vendor.js', 'app.js', cb
