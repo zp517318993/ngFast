@@ -5,7 +5,6 @@ Routes = ($stateProvider, $locationProvider, $urlRouterProvider)->
     url: '/'
     controller: 'ExampleCtrl as home'
     templateUrl: 'home.html'
-    title: 'Home'
 
   $urlRouterProvider.otherwise '/'
 

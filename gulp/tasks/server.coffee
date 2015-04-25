@@ -14,11 +14,11 @@ gulp.task 'server', ->
   server.use compression()
 
   server.use morgan 'dev'
-  server.use express.static config.dist.root
+  server.use express.static './'
 
   server.use (req, res)->
     res.sendFile 'index.html',
-      root: config.dist.root
+      root: './'
 
 
   s = http.createServer server

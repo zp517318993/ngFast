@@ -6,7 +6,7 @@ OnRun = ($rootScope, AppSettings)->
       $rootScope.pageTitle += toState.title
       $rootScope.pageTitle += ' · '
 
-      $rootScope.pageTitle += AppSettings.appTitle
+    $rootScope.pageTitle += AppSettings.appTitle
 
 OnRun.$inject= ['$rootScope','AppSettings']
 

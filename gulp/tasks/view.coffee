@@ -52,6 +52,6 @@ gulp.task 'index', ->
   .pipe gulpif !isDebug, htmlmin
     removeComments: true
     collapseWhitespace: true
-  .pipe gulp.dest config.dist.root
+  .pipe gulp.dest './'
   .pipe browserSync.reload
     stream: true
