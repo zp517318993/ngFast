@@ -1,6 +1,6 @@
 {
     "name": "ngFast",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "author": "soliury <hi@lingyong.me>",
     "description": "Boilerplate using CoffeeScript, AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
     "repository": {
