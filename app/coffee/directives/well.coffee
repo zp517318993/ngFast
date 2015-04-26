@@ -8,7 +8,7 @@ WellDirective = ($window, util)->
 
       if o > 0
         elem.css 'background-image', """
-            linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0, rgba(0, 0, 0, #{o}) 100%), url('/build/dev/images/ngfast-bg.jpg')
+            linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0, rgba(0, 0, 0, #{o}) 100%)
           """
 
 WellDirective.$inject = ['$window', 'util']

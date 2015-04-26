@@ -43,12 +43,14 @@ gulp.task 'views', ->
 
 gulp.task 'index', ->
   {isDebug, versionTag} = global
+  pathPrefix = '/build/production'
+
   gulp.src 'app/index.html'
   .pipe gulpif !isDebug, htmlreplace
-    'css': "/css/main_v#{versionTag}.css"
-    'vendor': "/js/vendor_v#{versionTag}.js"
-    'app': "/js/app_v#{versionTag}.js"
-    'templates': "/js/templates_v#{versionTag}.js"
+    'css': "#{pathPrefix}/css/main_v#{versionTag}.css"
+    'vendor': "#{pathPrefix}/js/vendor_v#{versionTag}.js"
+    'app': "#{pathPrefix}/js/app_v#{versionTag}.js"
+    'templates': "#{pathPrefix}/js/templates_v#{versionTag}.js"
   .pipe gulpif !isDebug, htmlmin
     removeComments: true
     collapseWhitespace: true
