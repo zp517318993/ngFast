@@ -20,7 +20,7 @@ angular.element(document).ready(function() {
 },{"1":"/Users/soliury/soliury/work/git/ngFast/app/coffee/constants.coffee","2":"/Users/soliury/soliury/work/git/ngFast/app/coffee/controllers/index.coffee","3":"/Users/soliury/soliury/work/git/ngFast/app/coffee/directives/index.coffee","4":"/Users/soliury/soliury/work/git/ngFast/app/coffee/on_run.coffee","5":"/Users/soliury/soliury/work/git/ngFast/app/coffee/routes.coffee","6":"/Users/soliury/soliury/work/git/ngFast/app/coffee/services/index.coffee","7":"angular","8":"angular-ui-router","9":"templates.js"}],"/Users/soliury/soliury/work/git/ngFast/app/coffee/config.coffee":[function(require,module,exports){
 var baseConfig, devLocal, devOnline, extendConfig, ip, production;
 
-ip = "192.168.31.142";
+ip = "192.168.0.100";
 
 production = {
   baseApi: 'http://lingyong.me'
