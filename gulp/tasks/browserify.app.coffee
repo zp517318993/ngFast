@@ -16,6 +16,7 @@ filter = require 'gulp-filter'
 clearDeadCode = require 'unreachable-branch-transform'
 intreq = require 'intreq-stream'
 duration = require 'gulp-duration'
+plumber = require 'gulp-plumber'
 
 
 config = require '../config'
@@ -47,8 +48,10 @@ buildScript = (file)->
     .once 'data', ()->
       gutil.log 'Rebundle...'
     .on 'error', handleErrors
-    .pipe intreq()
+    .pipe gulpif !isDebug, intreq()
     .pipe source file
+    .pipe plumber
+      errorHandler: handleErrors
     .pipe gulpif isDebug, buffer()
     .pipe gulpif isDebug, sourcemap.init
       loadMaps: true
@@ -58,6 +61,7 @@ buildScript = (file)->
       reuse: true
       autoTagVersion: global.autoTagVersion
     .pipe browserifyTimer
+    .pipe plumber.stop()
     .pipe gulp.dest config.scripts.dest
     .pipe filter '**/*.js'
     .pipe browserSync.reload

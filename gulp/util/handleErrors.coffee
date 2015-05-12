@@ -1,7 +1,7 @@
 notify = require 'gulp-notify'
 
 module.exports = (error)->
-  if !global.isProd
+  if global.isDebug
     args = Array.prototype.slice.call arguments
 
     notify.onError

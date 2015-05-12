@@ -30,6 +30,7 @@ gulp.task 'styles', ->
     reuse: true
     autoTagVersion: global.autoTagVersion
     beforeText: '_v'
+  .pipe plumber.stop()
   .pipe gulp.dest config.styles.dest
   .pipe filter '**/*.css'
   .pipe gulpif browserSync.active, browserSync.reload {stream: true}
