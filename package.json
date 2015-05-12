@@ -1,6 +1,6 @@
 {
     "name": "ngFast",
-    "version": "0.2.17",
+    "version": "0.2.19",
     "author": "soliury <hi@lingyong.me>",
     "description": "Boilerplate using CoffeeScript, AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
     "repository": {
@@ -87,7 +87,7 @@
     },
     "browser": {
         "angular": "./node_modules/angular/angular.js",
-        "templates.js": "./app/coffee/templates/templates.js"
+        "templates.js": "./.temp/templates/templates.js"
     },
     "browserify-shim": {
         "angular": "angular"

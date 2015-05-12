@@ -34,6 +34,7 @@ gulp.task 'views', ->
     collapseWhitespace: true
   .pipe templateCache name,
     standalone: true
+  .pipe gulp.dest './.temp/templates'
   .pipe browserified
   .pipe gulp.dest config.scripts.dest
   .pipe browserSync.reload
