@@ -9,23 +9,25 @@ browserify = require 'browserify'
 transform = require 'vinyl-transform'
 browserSync = require 'browser-sync'
 rename = require 'gulp-rename'
-
+vinylPaths = require 'vinyl-paths'
+del = require 'del'
 
 config = require '../config'
 
 
-gulp.task 'views', ->
+gulp.task 'views', (cb)->
   {isDebug} = global
+
+  vp = vinylPaths()
 
   browserified = transform (filename)->
     b = browserify()
     b.require 'templates.js'
     b.bundle()
 
+  name = 'templates.js'
 
-  if isDebug
-    name = 'templates.js'
-  else
+  if not isDebug
     name = "templates_v#{global.versionTag}.js"
 
 
@@ -36,10 +38,13 @@ gulp.task 'views', ->
   .pipe templateCache name,
     standalone: true
   .pipe gulp.dest './.temp/templates'
+  .pipe vp
   .pipe browserified
   .pipe gulp.dest config.scripts.dest
   .pipe browserSync.reload
     stream: true
+  .on 'end', ->
+    del vp.paths
 
 
 gulp.task 'index', ->
